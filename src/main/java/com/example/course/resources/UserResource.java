@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	// usa-se o método HTTP GET para recuperar informações do BD, para os outros tipos do CRUD é preciso usar o POST
+	// usa-se o método HTTP GET para recuperar informações do BD, para os outros tipos do CRUD é preciso usar o POST ou DELETE
 	
 	@PostMapping
 	public ResponseEntity<User> insert (@RequestBody User obj){
@@ -45,5 +46,13 @@ public class UserResource {
 		return ResponseEntity.created(uri).body(obj);
 		
 	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+		
+	}
+	
 
 }
