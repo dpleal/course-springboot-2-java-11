@@ -67,6 +67,10 @@ public class OrderItem implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	public Double getSubTotal() { // para que o JPA possa mapear é preciso estar "dentro" do get (na vdd com o prefixo get)
+		return price * quantity;
+	}
 
 	@Override
 	public int hashCode() {
